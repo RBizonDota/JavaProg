@@ -3,6 +3,6 @@ public class Main {
     	System.out.println("Hello World\n");
     	Server a = new Server();  
      	System.exit(0);
- 
+	// юху коммит git
 	}
 }
