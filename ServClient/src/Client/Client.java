@@ -1,27 +1,37 @@
 package Client;
 
+
 import java.io.*;
 import java.net.*;
 import java.util.*;
 
 class Client{
+    // Поля
     private int PORT_NUMBER = 3345;
     private String HOSTNAME = "127.0.0.1";
     private String CLIENTNAME = "Roman";
+    // Конструкторы
+    Client(){}
+    // Методы
     public int start()
     {
         String exitConditionStr="";
-        while (!(exitConditionStr.equals("/dc"))) {
+       cycle: while (!(exitConditionStr.equals("-dc"))) {
             try {
-                //Attempt to connect
-                Socket sock = new Socket(HOSTNAME, PORT_NUMBER);
-                PrintWriter out = new PrintWriter(sock.getOutputStream(), true);
-                out.println(CLIENTNAME);
-                //Output
                 System.out.print("Enter command: ");
                 Scanner scan = new Scanner(System.in);
                 String clientString = scan.nextLine();
                 exitConditionStr = clientString;
+                if( clientString.charAt(0) == '-')
+                {
+                    runClientCommand(clientString);
+                    continue cycle;
+                }
+                //Попытка подключения
+                Socket sock = new Socket(HOSTNAME, PORT_NUMBER);
+                PrintWriter out = new PrintWriter(sock.getOutputStream(), true);
+                out.println(CLIENTNAME);
+                //Вывод
                 out.println(clientString);
                 out.flush();
                 BufferedReader br = new BufferedReader(new InputStreamReader(sock.getInputStream()));
@@ -39,5 +49,41 @@ class Client{
             }
         }
         return 0;
+    }
+    // Смена HOSTNAME
+    private void changeHost(String newHostName)
+    {
+        HOSTNAME = newHostName;
+    }
+    // Обработка команд клиентом
+    private void runClientCommand(String clientCommand)
+    {
+        //Вернется в начало цикла по continue cycle и завершится
+        if(clientCommand.equals("-dc")){}
+        //Смена HOSTNAME по команде Change HOSTNAME
+        else if(clientCommand.equals("-chh"))
+        {
+            String newHostName;
+            System.out.print("Enter new host name: ");
+            Scanner scan = new Scanner(System.in);
+            newHostName = scan.nextLine();
+            scan.close();
+            String oldHostName = HOSTNAME;
+            changeHost(newHostName);
+            try{
+                Socket trySock = new Socket(HOSTNAME, PORT_NUMBER);
+                trySock.close();
+            }
+            catch (SocketException e)
+            {
+                System.out.println("Invalid hostname");
+                HOSTNAME = oldHostName;
+            }
+            catch(IOException e){}
+        }
+        else
+        {
+            System.out.println("Unknown client command");
+        }
     }
 }
