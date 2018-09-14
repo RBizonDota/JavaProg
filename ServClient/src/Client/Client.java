@@ -10,8 +10,8 @@ class Client{
     private String CLIENTNAME = "Roman";
     public int start()
     {
-        String f="";
-        while (!(f.equals("/dc"))) {
+        String exitConditionStr="";
+        while (!(exitConditionStr.equals("/dc"))) {
             try {
                 //Attempt to connect
                 Socket sock = new Socket(HOSTNAME, PORT_NUMBER);
@@ -20,9 +20,9 @@ class Client{
                 //Output
                 System.out.print("Enter command: ");
                 Scanner scan = new Scanner(System.in);
-                String client_string = scan.nextLine();
-                f = client_string;
-                out.println(client_string);
+                String clientString = scan.nextLine();
+                exitConditionStr = clientString;
+                out.println(clientString);
                 out.flush();
                 BufferedReader br = new BufferedReader(new InputStreamReader(sock.getInputStream()));
                 System.out.println(br.readLine());//Дублирование сообщения клиента
