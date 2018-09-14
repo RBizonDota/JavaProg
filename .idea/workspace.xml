@@ -5,7 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7dbfcfad-4771-4998-bb97-9315ebd4a1aa" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ServClient/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/ServClient/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ServClient/out/production/ServClient/Client/Client.class" beforeDir="false" afterPath="$PROJECT_DIR$/ServClient/out/production/ServClient/Client/Client.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ServClient/src/Client/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/ServClient/src/Client/Client.java" afterDir="false" />
@@ -216,7 +215,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="-1" width="1366" height="741" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.12651515" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />

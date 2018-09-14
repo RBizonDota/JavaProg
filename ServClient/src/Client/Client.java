@@ -67,7 +67,6 @@ class Client{
             System.out.print("Enter new host name: ");
             Scanner scan = new Scanner(System.in);
             newHostName = scan.nextLine();
-            scan.close();
             String oldHostName = HOSTNAME;
             changeHost(newHostName);
             try{
