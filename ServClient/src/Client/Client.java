@@ -9,11 +9,12 @@ class Client{
     {
         final int PORT_NUMBER = 3345;
         final String HOSTNAME = "127.0.0.1";
-        final String CLIENTNAME = "Client"; // TODO: use it in server class
+        final String CLIENTNAME = "Roman"; // TODO: use it in server class
         //Attempt to connect
         try {
             Socket sock = new Socket(HOSTNAME, PORT_NUMBER);
             PrintWriter out = new PrintWriter(sock.getOutputStream(), true);
+            out.println(CLIENTNAME);
             //Output
             Scanner scan = new Scanner(System.in);
 
