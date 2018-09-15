@@ -39,6 +39,7 @@ class Client{
                 //Попытка подключения
                 else{
                     if(connected){
+                        clientString = handleClientString(clientString);
                         sendMsg(clientString,true);
                     }
                     else{
@@ -52,6 +53,18 @@ class Client{
             }
         }
         return 0;
+    }
+    //обработка clientString
+    private String handleClientString(String string)
+    {
+        String buffer = string.replaceAll("\\p{Punct}"," ");
+        while( buffer.contains("  "))
+        {
+            String newBuffer = buffer.replace("  "," ");
+            buffer = newBuffer;
+        }
+
+        return buffer.toLowerCase();
     }
     // Смена HOSTNAME
     private void changeHost()

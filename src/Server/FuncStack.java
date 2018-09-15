@@ -14,27 +14,27 @@ public class FuncStack {
     public int rooter(String s, PrintWriter out, String clientName){
         try{
             switch(s){
-                case "Date":{
+                case "date":{
                     func_Date(out,clientName,s);
                 }
                 break;
-                case "Hi":{
+                case "hi":{
                     func_Hi(out,clientName,s);
                 }
                 break;
-                case "Hello":{
+                case "hello":{
                     func_Hi(out,clientName,s);
                 }
                 break;
-                case "Good morning":{
+                case "good morning":{
                     func_Hi(out,clientName,s);
                 }
                 break;
-                case "Good day":{
+                case "good day":{
                     func_Hi(out,clientName,s);
                 }
                 break;
-                case "Good evening":{
+                case "good evening":{
                     func_Hi(out,clientName,s);
                 }
                 break;
