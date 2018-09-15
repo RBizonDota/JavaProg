@@ -38,8 +38,12 @@ public class FuncStack {
                     func_Hi(out,clientName);
                 }
                 break;
+                case "-dc":{
+                    func_dc(out,clientName);
+                    return 1;
+                }
                 default:{
-                    func_default(out, clientName);
+                    func_default(out, clientName,s);
                 }
                 break;
             }
@@ -47,15 +51,15 @@ public class FuncStack {
         }
         catch (Exception ex)
         {
-            return 1;
+            return -1;
         }
     }
 
-    int func_default(PrintWriter out, String clientName){
+    int func_default(PrintWriter out, String clientName,String cmd){
         try {
             out.println(1);
             out.println(TimeStamp() + " - " + "Server: " + "Unknown command");
-            System.out.println(TimeStamp() + " - Task failed (Client " + clientName + ")");
+            System.out.println(TimeStamp() + " - Task failed (Client " + clientName + ") Unknown command: "+cmd);
             return 0;
         }catch(Exception ex)
         {
@@ -77,6 +81,17 @@ public class FuncStack {
         try {
             out.println(1);
             out.println(TimeStamp() + " - " + "Server: " + "Hello, The Living One, I am machine.");
+            System.out.println(TimeStamp() + " - Task completed (Client " + clientName + ")");
+            return 0;
+        }catch(Exception ex)
+        {
+            return 1;
+        }
+    }
+    int func_dc(PrintWriter out, String clientName){
+        try {
+            out.println(1);
+            out.println(TimeStamp() + " - " + "Server: " + "Disconnecting...");
             System.out.println(TimeStamp() + " - Task completed (Client " + clientName + ")");
             return 0;
         }catch(Exception ex)

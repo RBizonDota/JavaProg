@@ -18,19 +18,18 @@ class Server{
                 //Get connection
                 Socket clientSock = serverSock.accept();
                 System.out.println(fs.TimeStamp()+" - Connected client");
-
-                //Get input
-                LocalTime time = LocalTime.now();
+                boolean flag = true;
                 BufferedReader br = new BufferedReader(new InputStreamReader(clientSock.getInputStream()));
-                String messageTime = time.getHour() + ":" + time.getMinute() + ":" + time.getSecond();
+                PrintWriter out = new PrintWriter(clientSock.getOutputStream(), true);
                 String clientName = br.readLine();
                 System.out.println(fs.TimeStamp()+" - Client Name: "+clientName);
-                String clientMes = br.readLine();
-                String client_string = messageTime + " - " + clientName + ": " + clientMes;
-                PrintWriter out = new PrintWriter(clientSock.getOutputStream(), true);
-                out.println(client_string);
-                fs.rooter(clientMes,out,clientName);
-
+                //Working cycle
+                while(flag) {
+                    String clientMes = br.readLine();
+                    String client_string = fs.TimeStamp() + " - " + clientName + ": " + clientMes;
+                    out.println(client_string);
+                    flag = (fs.rooter(clientMes, out, clientName)!=1);
+                }
                 //Closing
                 out.close();
                 br.close();
