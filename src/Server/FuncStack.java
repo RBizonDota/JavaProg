@@ -1,49 +1,56 @@
 package Server;
-
 import java.io.PrintWriter;
-import java.time.LocalDate;
-import java.time.LocalTime;
+import java.time.*;
+
 
 public class FuncStack {
     public String TimeStamp(){
-        String res = LocalTime.now().getHour() + ":" + LocalTime.now().getMinute() + ":"
-                + LocalTime.now().getSecond();
+        String h = Integer.toString(LocalTime.now().getHour());
+        if(h.length()<2)
+            h="0"+h;
+        String m = Integer.toString(LocalTime.now().getMinute());
+        if(m.length()<2)
+            m="0"+m;
+        String s = Integer.toString(LocalTime.now().getSecond());
+        if(s.length()<2)
+            s="0"+s;
+        String res = h + ":" + m + ":" + s;
         return res;
     }
 
-    public int rooter(String s, PrintWriter out, String clientName){
+    public int rooter(String s, PrintWriter out, String clientName, int code){
         try{
             switch(s){
                 case "date":{
-                    func_Date(out,clientName,s);
+                    func_Date(out,clientName,s,code);
                 }
                 break;
                 case "hi":{
-                    func_Hi(out,clientName,s);
+                    func_Hi(out,clientName,s,code);
                 }
                 break;
                 case "hello":{
-                    func_Hi(out,clientName,s);
+                    func_Hi(out,clientName,s,code);
                 }
                 break;
                 case "good morning":{
-                    func_Hi(out,clientName,s);
+                    func_Hi(out,clientName,s,code);
                 }
                 break;
                 case "good day":{
-                    func_Hi(out,clientName,s);
+                    func_Hi(out,clientName,s,code);
                 }
                 break;
                 case "good evening":{
-                    func_Hi(out,clientName,s);
+                    func_Hi(out,clientName,s,code);
                 }
                 break;
                 case "-dc":{
-                    func_dc(out,clientName,s);
+                    func_dc(out,clientName,s,code);
                     return 1;
                 }
                 default:{
-                    func_default(out, clientName,s);
+                    func_default(out, clientName,s,code);
                 }
                 break;
             }
@@ -55,44 +62,44 @@ public class FuncStack {
         }
     }
 
-    int func_default(PrintWriter out, String clientName,String cmd){
+    int func_default(PrintWriter out, String clientName,String cmd,int code){
         try {
             out.println(1);
             out.println(TimeStamp() + " - " + "Server: " + "Unknown command");
-            System.out.println(TimeStamp() + " - Task failed (Client " + clientName + ") Unknown command: "+cmd);
+            System.out.println(TimeStamp() + " <"+code+"> Task failed (Client " + clientName + ") Unknown command: "+cmd);
             return 0;
         }catch(Exception ex)
         {
             return 1;
         }
     }
-    int func_Date(PrintWriter out, String clientName,String cmd){
+    int func_Date(PrintWriter out, String clientName,String cmd,int code){
         try {
             out.println(1);
             out.println(TimeStamp() + " - " + "Server: " + LocalDate.now().toString());
-            System.out.println(TimeStamp() + " - Task completed (Client " + clientName + ") command "+cmd);
+            System.out.println(TimeStamp() + " <"+code+"> Task completed (Client " + clientName + ") command "+cmd);
             return 0;
         }catch(Exception ex)
         {
             return 1;
         }
     }
-    int func_Hi(PrintWriter out, String clientName,String cmd){
+    int func_Hi(PrintWriter out, String clientName,String cmd,int code){
         try {
             out.println(1);
             out.println(TimeStamp() + " - " + "Server: " + "Hello, The Living One, I am machine.");
-            System.out.println(TimeStamp() + " - Task completed (Client " + clientName + ") command "+cmd);
+            System.out.println(TimeStamp() + " <"+code+"> Task completed (Client " + clientName + ") command "+cmd);
             return 0;
         }catch(Exception ex)
         {
             return 1;
         }
     }
-    int func_dc(PrintWriter out, String clientName,String cmd){
+    int func_dc(PrintWriter out, String clientName,String cmd,int code){
         try {
             out.println(1);
             out.println(TimeStamp() + " - " + "Server: " + "Disconnecting...");
-            System.out.println(TimeStamp() + " - Task completed (Client " + clientName + ") command "+cmd);
+            System.out.println(TimeStamp() + " <"+code+"> Task completed (Client " + clientName + ") command "+cmd);
             return 0;
         }catch(Exception ex)
         {
