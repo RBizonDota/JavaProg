@@ -32,6 +32,8 @@ class Client{
             try {
                 System.out.print("Enter command: ");
                 String clientString = scan.nextLine();
+                if(clientString.length()==0)
+                    continue;
                 if( clientString.charAt(0) == '-')
                 {
                     runClientCommand(clientString);
