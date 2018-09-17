@@ -49,6 +49,10 @@ public class FuncStack {
                     func_dc(out,clientName,s,code);
                     return 1;
                 }
+                case "code":{
+                    func_code(out,clientName,s,code);
+                }
+                break;
                 default:{
                     func_default(out, clientName,s,code);
                 }
@@ -105,5 +109,35 @@ public class FuncStack {
         {
             return 1;
         }
+    }
+    int func_code(PrintWriter out, String clientName,String cmd,int code){
+
+        int ax_start = 0b1101;
+        int ax = ax_start;
+        int gx = 0b1011;
+        int sx;
+        ax<<=3;
+        int lx = ax;//TODO ошибка!!!
+
+        for (int i = 3;i>-1;i--){
+            int lol = (int)(Math.pow(2,(double)(i+3)));
+            if(lx/lol==1){
+                lx^=gx<<i;
+            }
+        }
+        sx = ax ^ (lx);
+        out.println(3);
+        out.println(TimeStamp() + " - " + "Server: " + "AX = "+Integer.toBinaryString(ax_start));
+        out.println(TimeStamp() + " - " + "Server: " + "SX = "+Integer.toBinaryString(sx));
+        lx = sx;
+        for (int i = 3;i>-1;i--){
+            int lol = (int)(Math.pow(2,(double)(i+3)));
+            if(lx/lol==1){
+                lx^=gx<<i;
+            }
+        }
+        out.println(TimeStamp() + " - " + "Server: " + "SX%GX = "+Integer.toBinaryString(lx));
+        System.out.println(TimeStamp() + " <"+code+"> Task completed (Client " + clientName + ") command "+cmd);
+        return 0;
     }
 }
