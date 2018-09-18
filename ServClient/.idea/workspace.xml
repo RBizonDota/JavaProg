@@ -5,7 +5,6 @@
       <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../out/production/untitled104/Server/FuncStack.class" beforeDir="false" afterPath="$PROJECT_DIR$/../out/production/untitled104/Server/FuncStack.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../src/Server/FuncStack.java" beforeDir="false" afterPath="$PROJECT_DIR$/../src/Server/FuncStack.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/Server/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/../src/Server/Server.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -125,8 +124,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Client/Client.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2205">
-              <caret line="147" column="85" lean-forward="true" selection-start-line="147" selection-start-column="85" selection-end-line="147" selection-end-column="85" />
+            <state relative-caret-position="225">
+              <caret line="15" column="24" lean-forward="true" selection-start-line="15" selection-start-column="24" selection-end-line="15" selection-end-column="24" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -335,8 +334,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Client/Client.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2205">
-          <caret line="147" column="85" lean-forward="true" selection-start-line="147" selection-start-column="85" selection-end-line="147" selection-end-column="85" />
+        <state relative-caret-position="225">
+          <caret line="15" column="24" lean-forward="true" selection-start-line="15" selection-start-column="24" selection-end-line="15" selection-end-column="24" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
