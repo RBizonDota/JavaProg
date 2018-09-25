@@ -57,6 +57,10 @@ public class FuncStack {
                     func_code(out,clientName,s,code);
                 }
                 break;
+                case "cvar4":{
+                    func_code_heming(out,clientName,s,code);
+                }
+                break;
                 default:{
                     func_default(out, clientName,s,code);
                 }
@@ -130,7 +134,7 @@ public class FuncStack {
             }
         }
         sx = ax ^ (lx);
-        out.println(12);
+        out.println(11);
         out.println(TimeStamp() + " - " + "Server: " + "AX = "+Integer.toBinaryString(ax_start));
         out.println(TimeStamp() + " - " + "Server: " + "SX = "+Integer.toBinaryString(sx));
         lx = sx;
@@ -177,6 +181,69 @@ public class FuncStack {
         }
 
         System.out.println(TimeStamp() + " <"+code+"> Task completed (Client " + clientName + ") command "+cmd);
+        return 0;
+    }
+    int func_code_heming(PrintWriter out, String clientName,String cmd,int code){
+        int ax_start = 0b1010;
+        int ax = ax_start&7;
+        int bx = (ax_start^ax)<<1;
+        int sx = bx^ax;
+        for (int i = 0;i<3;i++){
+            int lol = (int)(Math.pow(2,(double)(i)));
+            bx = (int)(Math.pow(2,(double)(7-lol)));//для 1-х 3-х работает
+            for (int j=7-lol;j>-1;j--){
+                //System.out.println(Integer.toBinaryString(((sx>>j)&1))+" "+Integer.toString(j/lol)+" ");
+                if ((((sx>>j)&1)==1)&&((j/lol)%2==0)) {
+                    sx ^= bx;
+                }
+            }
+        }
+        out.println(10);
+        out.println(TimeStamp() + " - " + "Server: " + "AX = "+Integer.toBinaryString(ax_start));
+        out.println(TimeStamp() + " - " + "Server: " + "SX = "+Integer.toBinaryString(sx));
+        out.println(TimeStamp() + " - " + "Server: " + "Decoding:");
+        int control = 0b1101000;
+        int lx;
+        int l;
+        int st;
+        int[] stat = new int[8];
+        int[] stall = new int[8];
+        for (int exept = 0;exept<128;exept++)
+        {
+            st = 0;
+            bx = exept;
+            for(int i = 6;i>-1;i--)
+            {
+                l = (int)(Math.pow(2,(double)(i)));
+                if(bx/l==1){
+                    st++;// Получили количество значащих единиц в векторе ошибок
+                    bx -=l;
+                }
+            }
+            stall[st]++;
+            lx = sx;
+            lx^=exept;//выражение с ошибкой
+            int buf = control&lx;//сохраняю контрольные биты
+            lx &= (control^127);//обнуляю контрольные биты
+            for (int i = 0;i<3;i++){
+                int lol = (int)(Math.pow(2,(double)(i)));
+                bx = (int)(Math.pow(2,(double)(7-lol)));//для 1-х 3-х работает
+                for (int j=7-lol;j>-1;j--){
+                    if ((((lx>>j)&1)==1)&&((j/lol)%2==0)) {
+                        lx ^= bx;
+                    }
+                }
+            }
+            lx=lx&control;
+            if(buf != lx) {
+                stat[st]++;//При нахождении ошибки
+            }
+        }
+        for (int i=1;i<8;i++) {
+            out.println(TimeStamp() + " - " + "Server: " + "Number of changed bits = "+i+", number of codes = "+stall[i]+", detected exceptions = "+stat[i]+", "+(double)(stat[i])/(double)(stall[i])*100+"%");
+        }
+        System.out.println(TimeStamp() + " <"+code+"> Task completed (Client " + clientName + ") command "+cmd);
+
         return 0;
     }
 }
